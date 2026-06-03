@@ -1,0 +1,1661 @@
+/* ============================================================
+  CSS変数（カラー・フォント）
+============================================================ */
+:root {
+  --color-base: #F2E8E1;
+  --color-text: #2C2220;
+  --color-accent: #C8906A;
+  --color-white: #FFFFFF;
+  --color-light: #FAF5F2;
+  --font-serif: 'Noto Serif JP', serif;
+  --font-sans: 'Noto Sans JP', sans-serif;
+  --section-gap: 40px;
+  --inner-padding: 20px;
+}
+
+/* ============================================================
+  Reset & Base
+============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background-color: var(--color-white);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ============================================================
+  Button
+============================================================ */
+.btn {
+  display: inline-block;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s ease;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.btn--small {
+  font-size: 13px;
+  padding: 8px 16px;
+  height: 36px;
+  line-height: 20px;
+}
+
+/* ============================================================
+  アニメーション
+============================================================ */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 4px 16px rgba(200, 144, 106, 0.4); }
+  50% { transform: scale(1.03); box-shadow: 0 6px 24px rgba(200, 144, 106, 0.6); }
+}
+
+/* スクロールフェードイン */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 遅延クラス（順番に表示） */
+.fade-in:nth-child(2) { transition-delay: 0.1s; }
+.fade-in:nth-child(3) { transition-delay: 0.2s; }
+.fade-in:nth-child(4) { transition-delay: 0.3s; }
+.fade-in:nth-child(5) { transition-delay: 0.4s; }
+
+.btn--large {
+  font-size: 16px;
+  font-weight: 700;
+  width: calc(100% - 40px);
+  height: 56px;
+  line-height: 56px;
+  padding: 0;
+  border-radius: 28px;
+  letter-spacing: 0.05em;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+/* ============================================================
+  Header
+============================================================ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-base);
+  border-bottom: 1px solid rgba(200, 144, 106, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.header--hidden {
+  transform: translateY(-100%);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px var(--inner-padding);
+  max-width: 375px;
+  margin: 0 auto;
+}
+
+.header__logo {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--color-text);
+}
+
+.header__logo span {
+  font-style: italic;
+}
+
+/* ============================================================
+  FV（ファーストビュー）
+============================================================ */
+.fv {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.fv__bg {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.fv__bg--pc {
+  display: none;
+}
+
+.fv__overlay {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.30) 50%,
+    rgba(0, 0, 0, 0) 75%
+  );
+  z-index: 1;
+}
+
+.fv__content {
+  z-index: 2;
+}
+
+.fv__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px var(--inner-padding);
+}
+
+/* 上部：2つの独立した箱 */
+.fv__top {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  align-self: flex-start;
+}
+
+.fv__box {
+  background-color: transparent;
+  padding: 4px 0;
+  border-radius: 4px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.fv__box--brand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.fv__brand-category {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.15em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  font-family: var(--font-serif);
+}
+
+.fv__catch {
+  font-family: var(--font-serif);
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6), 0 1px 4px rgba(0,0,0,0.8);
+}
+
+.fv__sub {
+  font-size: 14px;
+  color: var(--color-white);
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+
+.fv__category {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.1em;
+}
+
+/* 中部：バッジ1つの箱 */
+.fv__badge-box {
+  background-color: transparent;
+  padding: 8px 0;
+  border-radius: 4px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fv__badge {
+  color: var(--color-white);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+
+/* 下部：オファー（右手首あたり・下部） */
+.fv__offer {
+  background-color: #2C2220;
+  color: var(--color-white);
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.8;
+  align-self: flex-start;
+}
+
+/* ============================================================
+  お悩みセクション
+============================================================ */
+.worries {
+  background-color: var(--color-base);
+  padding: var(--section-gap) 0;
+}
+
+.worries__inner {
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 var(--inner-padding);
+}
+
+.worries__title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 32px;
+  color: var(--color-text);
+}
+
+.worries__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.worries__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.worries__check {
+  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.worries__lead-wrap {
+  background-color: var(--color-white);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  margin-top: 32px;
+}
+
+.worries__lead-sub {
+  font-size: 15px;
+  color: #5a4a44;
+  line-height: 1.8;
+  margin-bottom: 12px;
+  display: inline-block;
+  text-align: left;
+}
+
+.worries__lead {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--color-accent);
+}
+
+/* ============================================================
+  商品紹介
+============================================================ */
+.product {
+  background-color: var(--color-white);
+  padding: var(--section-gap) 0;
+}
+
+.product__inner {
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 var(--inner-padding);
+  text-align: center;
+}
+
+.product__title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: var(--color-text);
+}
+
+.product__ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.product__ingredient {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.product__circle {
+  width: 110px;
+  height: 110px;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+}
+
+.product__circle-name {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.product__circle-amount {
+  font-size: 12px;
+  margin-top: 4px;
+  opacity: 0.9;
+}
+
+.product__ingredient-desc {
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.product__image-wrap {
+  margin-top: 8px;
+}
+
+.product__bottle-wrap {
+  display: none;
+}
+
+.product__bottle-point {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--color-text);
+  line-height: 1.8;
+}
+
+.product__image {
+  width: 220px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+  選ばれる理由
+============================================================ */
+.reasons {
+  position: relative;
+  padding: 40px 0;
+  overflow: hidden;
+}
+
+.reasons__bg-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.reasons__bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+}
+
+.reasons__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 var(--inner-padding);
+}
+
+.reasons__title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--color-text);
+}
+
+.reasons__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.reasons__card {
+  background-color: rgba(255, 255, 255, 0.88);
+  border-radius: 4px;
+  padding: 12px 16px;
+  display: inline-block;
+}
+
+.reasons__card-title {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* ============================================================
+  ブランドストーリー
+============================================================ */
+.story {
+  background-color: #F5F0E8;
+  padding: var(--section-gap) 0;
+}
+
+.story__inner {
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 var(--inner-padding);
+  display: flex;
+  flex-direction: column;
+}
+
+.story__title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--color-text);
+}
+
+/* parl2.pngを背景にしたカード */
+.story__content {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.story__image-wrap {
+  flex-shrink: 0;
+  width: 130px;
+}
+
+.story__image {
+  width: 130px;
+  height: 180px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 8px;
+  display: block;
+}
+
+.story__text-wrap {
+  flex: 1;
+  padding: 4px 0;
+  text-align: left;
+}
+
+.story__body {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--color-text);
+  margin-bottom: 12px;
+  font-family: var(--font-serif);
+  font-weight: 500;
+}
+
+.story__body:last-child {
+  margin-bottom: 0;
+}
+
+.story__promise {
+  clear: both;
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(200, 144, 106, 0.3);
+}
+
+.story__lead {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.story__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.story__list-item {
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+/* ============================================================
+  お客様の声
+============================================================ */
+.reviews {
+  background-color: var(--color-white);
+  padding: var(--section-gap) 0;
+}
+
+.reviews__inner {
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 8px;
+  text-align: center;
+}
+
+.reviews__title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
+  color: var(--color-text);
+  display: block;
+}
+
+.reviews__social-proof {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0 auto 32px;
+  background-color: var(--color-base);
+  padding: 12px 40px;
+  border-radius: 8px;
+}
+
+.reviews__social-proof-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reviews__stars {
+  color: #E8A020;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.reviews__rating {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.reviews__count {
+  font-size: 13px;
+  color: #5a4a44;
+}
+
+.reviews__survey {
+  font-size: 10px;
+  color: #9a8a84;
+  text-align: center;
+}
+
+.reviews__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* 左右交互レイアウト */
+.reviews__item {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  min-height: 200px;
+}
+
+.reviews__item-image-wrap {
+  flex-shrink: 0;
+  width: 120px;
+}
+
+.reviews__item-image {
+  width: 120px;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.reviews__item-text {
+  flex: 1;
+  padding: 16px;
+  background-color: var(--color-base);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.reviews__item--text-left .reviews__item-text {
+  order: 1;
+}
+.reviews__item--text-left .reviews__item-image-wrap {
+  order: 2;
+}
+
+.reviews__item--image-left .reviews__item-image-wrap {
+  order: 1;
+}
+.reviews__item--image-left .reviews__item-text {
+  order: 2;
+}
+
+.reviews__item-name {
+  font-size: 11px;
+  color: #7a6a64;
+}
+
+.reviews__item-title {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.reviews__item-body {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #5a4a44;
+}
+
+/* ============================================================
+  キャンペーン・価格
+============================================================ */
+.campaign {
+  max-width: 375px;
+  margin: 0 auto;
+}
+
+/* 茶色ヘッダー */
+.campaign__header {
+  background-color: var(--color-accent);
+  padding: 20px var(--inner-padding);
+  text-align: center;
+  display: block;
+  border-radius: 0;
+}
+
+.campaign__label {
+  font-size: 13px;
+  color: var(--color-white);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.campaign__title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+/* 白背景：商品・価格エリア */
+.campaign__main {
+  background-color: var(--color-white);
+  padding: 24px var(--inner-padding);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.campaign__content {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.campaign__image-wrap {
+  flex-shrink: 0;
+}
+
+.campaign__image {
+  width: 130px;
+}
+
+.campaign__off-badge {
+  width: 72px;
+  height: 72px;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  margin: 8px 0;
+}
+
+.campaign__off-num {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.campaign__off-text {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.campaign__price-wrap {
+  text-align: left;
+}
+
+.campaign__regular {
+  font-size: 13px;
+  color: #7a6a64;
+  margin-bottom: 4px;
+}
+
+.campaign__regular s {
+  color: #7a6a64;
+}
+
+.campaign__special {
+  font-size: 13px;
+  color: var(--color-accent);
+  margin-bottom: 4px;
+}
+
+.campaign__price {
+  font-family: var(--font-serif);
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.campaign__price span {
+  font-size: 18px;
+}
+
+.campaign__shipping {
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+/* 薄いベージュ：特典エリア */
+.campaign__benefits-wrap {
+  background-color: #FAF5F0;
+  padding: 16px var(--inner-padding);
+}
+
+.campaign__benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.campaign__benefit {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* 濃いベージュ：注意書きエリア */
+.campaign__notes-wrap {
+  background-color: #EDE5D8;
+  padding: 16px var(--inner-padding);
+}
+
+.campaign__notes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campaign__note {
+  font-size: 11px;
+  color: #7a6a64;
+  line-height: 1.6;
+}
+
+/* ============================================================
+  FAQ
+============================================================ */
+.faq {
+  background-color: #FDFAF8;
+  padding: var(--section-gap) 0;
+}
+
+.faq__inner {
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 var(--inner-padding);
+  text-align: center;
+}
+
+.faq__title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-white);
+  background-color: var(--color-accent);
+  padding: 12px 48px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  letter-spacing: 0.1em;
+  display: inline-block;
+}
+
+.faq__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq__item {
+  border-bottom: 1px solid rgba(44, 34, 32, 0.15);
+}
+
+.faq__question {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  text-align: left;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.faq__icon {
+  font-size: 12px;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.faq__answer {
+  display: none;
+  padding-bottom: 18px;
+}
+
+.faq__answer p {
+  font-size: 14px;
+  color: #5a4a44;
+  line-height: 1.8;
+}
+
+.faq__item--open .faq__answer {
+  display: block;
+}
+
+/* ============================================================
+  最終CTA
+============================================================ */
+.cta {
+  background-color: var(--color-base);
+  padding: var(--section-gap) 0;
+  text-align: center;
+}
+
+.cta__inner {
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 var(--inner-padding);
+}
+
+.cta__catch {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.cta__sub {
+  font-size: 14px;
+  color: #5a4a44;
+  margin-bottom: 24px;
+}
+
+/* SP：縦並びそのまま */
+.cta__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta__text-wrap {
+  text-align: center;
+}
+
+.cta__image {
+  width: 200px;
+  margin: 0 auto;
+}
+
+.cta__price-label {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 16px;
+}
+
+.cta__micro {
+  font-size: 12px;
+  color: #7a6a64;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+  Footer
+============================================================ */
+.footer {
+  background-color: var(--color-text);
+  padding: 12px 0;
+  margin-bottom: 64px;
+}
+
+.footer__inner {
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 var(--inner-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer__nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.footer__link {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.3s ease;
+}
+
+.footer__link:hover {
+  color: var(--color-white);
+}
+
+.footer__copy {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ============================================================
+  下部固定CTAボタン
+============================================================ */
+.sticky-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(242, 232, 225, 0.97);
+  padding: 10px 20px;
+  z-index: 200;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn--sticky {
+  display: block;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  border-radius: 24px;
+  letter-spacing: 0.05em;
+  transition: opacity 0.3s ease;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+.btn--sticky:hover {
+  opacity: 0.8;
+  animation: none;
+}
+
+.btn--large:hover {
+  animation: none;
+  opacity: 0.85;
+}
+
+/* ============================================================
+  PC版（768px以上）レスポンシブ
+============================================================ */
+@media screen and (min-width: 768px) {
+
+  :root {
+    --inner-padding: 40px;
+    --section-gap: 64px;
+  }
+
+  /* Header */
+  .header__inner {
+    max-width: 1200px;
+    padding: 16px 40px;
+  }
+
+  .header__logo {
+    font-size: 24px;
+  }
+
+  /* FV */
+  .fv__bg--sp {
+    display: none;
+  }
+
+  .fv__bg--pc {
+    display: block;
+    height: 100vh;
+    max-height: 800px;
+    object-position: center center;
+  }
+
+  .fv__overlay {
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.35) 40%,
+      rgba(0, 0, 0, 0) 70%
+    );
+  }
+
+  .fv__badge-box {
+    background-color: transparent;
+    align-self: flex-start;
+    padding-left: 0;
+  }
+
+  .fv__badge {
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    font-size: 20px;
+  }
+
+  .fv__offer {
+    background-color: transparent;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    align-self: flex-start;
+    padding-left: 0;
+    font-size: 20px;
+  }
+
+  .fv__sub {
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    font-size: 24px !important;
+  }
+
+  .fv__category {
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    font-size: 24px !important;
+  }
+
+  .fv__catch {
+    font-size: 48px;
+  }
+
+  .fv__sub {
+    font-size: 20px;
+  }
+
+  .fv__category {
+    font-size: 16px;
+  }
+
+  .fv__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 420px;
+    background-color: transparent;
+    padding: 60px 40px;
+    justify-content: center;
+    transform: none;
+    margin: 0;
+  }
+
+  .fv__top {
+    align-self: flex-start;
+  }
+
+  .fv__badge-box {
+    align-self: flex-start;
+  }
+
+  .fv__offer {
+    align-self: flex-start;
+  }
+
+  .fv__catch {
+    font-size: 44px;
+  }
+
+  .fv__brand-name {
+    font-size: 16px;
+  }
+
+  .fv__brand-category {
+    font-size: 13px;
+  }
+
+  .fv__sub {
+    font-size: 18px;
+  }
+
+  /* お悩みセクション */
+  .worries__inner {
+    max-width: 1200px;
+  }
+
+  .worries__title {
+    font-size: 32px;
+  }
+
+  .worries__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .worries__item {
+    font-size: 24px;
+  }
+
+  .worries__lead {
+    font-size: 22px;
+  }
+
+  .worries__lead-sub {
+    font-size: 24px;
+  }
+
+  /* 商品紹介 */
+  .product__inner {
+    max-width: 1200px;
+  }
+
+  .product__title {
+    font-size: 32px;
+  }
+
+  .product__image {
+    width: 260px;
+  }
+
+  .product__bottle-wrap {
+    display: flex;
+    align-items: stretch;
+    gap: 60px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .product__bottle-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0;
+    max-width: 320px;
+    min-height: 320px;
+  }
+
+  .product__bottle-point {
+    font-size: 20px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  /* SP版のボトル画像を非表示 */
+  .product__ingredients + .product__image-wrap {
+    display: none;
+  }
+
+  .product__ingredients {
+    flex-direction: row;
+    justify-content: center;
+    gap: 80px;
+    margin-bottom: 48px;
+  }
+
+  .product__ingredient {
+    width: 200px;
+  }
+
+  .product__circle {
+    width: 180px;
+    height: 180px;
+  }
+
+  .product__circle-name {
+    font-size: 20px;
+  }
+
+  .product__circle-amount {
+    font-size: 20px;
+  }
+
+  .product__ingredient-desc {
+    font-size: 20px;
+    white-space: nowrap;
+  }
+
+  /* 選ばれる理由 */
+  .reasons__inner {
+    max-width: 1200px;
+  }
+
+  .reasons__title {
+    font-size: 32px;
+  }
+
+  .reasons__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .reasons__card-title {
+    font-size: 18px;
+  }
+
+  .reasons__card-desc {
+    font-size: 15px;
+  }
+
+  /* ブランドストーリー */
+  .story__inner {
+    max-width: 860px;
+  }
+
+  .story__title {
+    font-size: 28px;
+  }
+
+  .story__content {
+    flex-direction: row;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .story__image-wrap {
+    width: 340px;
+    flex-shrink: 0;
+  }
+
+  .story__image {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 12px;
+  }
+
+  .story__text-wrap {
+    flex: 1;
+    padding: 0;
+    text-align: left;
+  }
+
+  .story__body {
+    font-size: 18px;
+    line-height: 2.2;
+  }
+
+  .story__promise {
+    text-align: center;
+  }
+
+  .story__list {
+    flex-direction: row;
+    justify-content: center;
+    gap: 48px;
+  }
+
+  .story__list-item {
+    font-size: 15px;
+  }
+
+  /* お客様の声 */
+  .reviews__inner {
+    max-width: 1200px;
+    text-align: center;
+  }
+
+  .reviews__title {
+    font-size: 32px;
+  }
+
+  .reviews__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* キャンペーン */
+  .campaign__inner {
+    max-width: 1200px;
+  }
+
+  .campaign {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .campaign__header {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    padding: 18px 60px;
+    border-radius: 4px;
+    max-width: none;
+    margin: 0;
+  }
+
+  .campaign__label {
+    margin-bottom: 0;
+    font-size: 15px;
+  }
+
+  .campaign__title {
+    font-size: 28px;
+    margin: 0;
+  }
+
+  .campaign__main {
+    display: flex;
+    align-items: center;
+    padding: 40px 60px;
+    gap: 60px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .campaign__image-wrap {
+    flex-shrink: 0;
+    width: auto;
+    padding: 0;
+    border-right: none;
+  }
+
+  .campaign__image {
+    width: 220px;
+  }
+
+  .campaign__content {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  .campaign__price-wrap {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 16px 0;
+  }
+
+  .campaign__regular {
+    font-size: 20px;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  .campaign__off-badge {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  .campaign__off-num {
+    font-size: 26px;
+  }
+
+  .campaign__special {
+    font-size: 20px;
+    grid-column: 1;
+    grid-row: 2;
+    align-self: center;
+  }
+
+  .campaign__price {
+    font-size: 64px;
+    grid-column: 2;
+    grid-row: 2;
+    text-align: center;
+    line-height: 1;
+  }
+
+  .campaign__price span {
+    font-size: 24px;
+  }
+
+  .campaign__shipping {
+    font-size: 18px;
+    grid-column: 1 / 3;
+    grid-row: 3;
+  }
+
+  .campaign__benefits-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 16px 60px;
+  }
+
+  .campaign__benefits {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .campaign__benefit {
+    font-size: 18px;
+  }
+
+  .campaign__notes-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 12px 60px;
+  }
+
+  .campaign__notes {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+  }
+
+  .campaign__note {
+    font-size: 11px;
+  }
+
+  /* FAQ */
+  .faq__inner {
+    max-width: 1200px;
+    text-align: center;
+  }
+
+  .faq__title {
+    font-size: 22px;
+    padding: 14px 60px;
+  }
+
+  .faq__question {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .faq__answer p {
+    font-size: 15px;
+    text-align: left;
+  }
+
+  /* 最終CTA */
+  .cta__inner {
+    max-width: 860px;
+  }
+
+  .cta__top {
+    flex-direction: row;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  .cta__image-wrap {
+    flex-shrink: 0;
+  }
+
+  .cta__image {
+    width: 280px;
+  }
+
+  .cta__text-wrap {
+    text-align: left;
+    flex: 1;
+  }
+
+  .cta__catch {
+    font-size: 48px;
+  }
+
+  .cta__sub {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+  .cta__price-label {
+    font-size: 28px;
+  }
+
+  .btn--large {
+    width: 480px;
+    font-size: 18px;
+  }
+
+  /* スティッキーCTA */
+  .sticky-cta {
+    padding: 12px 40px;
+  }
+
+  .btn--sticky {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* Footer */
+  .footer__inner {
+    max-width: 1200px;
+  }
+
+  .footer__nav {
+    flex-direction: row;
+    justify-content: center;
+  }
+}

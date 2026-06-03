@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LUMINÉのご購入フォームです。">
+  <link rel="canonical" href="https://lumine-innerglow.jp/form.html">
+  <link rel="icon" href="images/pearl.jpg" type="image/jpeg">
+  <link rel="apple-touch-icon" href="images/pearl.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="form.css">
+  <title>ご購入フォーム｜LUMINÉ</title>
+</head>
+<body>
+
+  <header class="form-header">
+    <div class="form-header__inner">
+      <a href="index.html" class="form-header__logo">LUMIN<span>É</span></a>
+    </div>
+  </header>
+
+  <main class="form-main">
+    <div class="form-main__inner">
+
+      <div class="form-hero">
+        <p class="form-hero__label">PURCHASE FORM</p>
+        <h1 class="form-hero__title">ご購入フォーム</h1>
+        <p class="form-hero__sub">必要事項をご入力の上、お申し込みください。<br>
+        <span class="form-hero__required">＊</span>は必須項目です。</p>
+      </div>
+
+      <form class="form" id="purchaseForm" novalidate>
+
+        <!-- お名前 -->
+        <div class="form__group" id="group-name">
+          <label class="form__label" for="name">
+            お名前 <span class="form__required">＊</span>
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form__input"
+            placeholder="例：山田 花子"
+            autocomplete="name"
+          >
+          <p class="form__error" id="error-name">お名前を入力してください</p>
+        </div>
+
+        <!-- メールアドレス -->
+        <div class="form__group" id="group-email">
+          <label class="form__label" for="email">
+            メールアドレス <span class="form__required">＊</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form__input"
+            placeholder="例：example@mail.com"
+            autocomplete="email"
+          >
+          <p class="form__error" id="error-email">正しいメールアドレスを入力してください</p>
+        </div>
+
+        <!-- 電話番号 -->
+        <div class="form__group" id="group-tel">
+          <label class="form__label" for="tel">
+            電話番号 <span class="form__required">＊</span>
+          </label>
+          <input
+            type="tel"
+            id="tel"
+            name="tel"
+            class="form__input"
+            placeholder="例：090-1234-5678"
+            autocomplete="tel"
+          >
+          <p class="form__error" id="error-tel">電話番号を入力してください</p>
+        </div>
+
+        <!-- 郵便番号 -->
+        <div class="form__group" id="group-zip">
+          <label class="form__label" for="zip">
+            郵便番号 <span class="form__required">＊</span>
+          </label>
+          <input
+            type="text"
+            id="zip"
+            name="zip"
+            class="form__input form__input--half"
+            placeholder="例：123-4567"
+            autocomplete="postal-code"
+            maxlength="8"
+          >
+          <p class="form__error" id="error-zip">郵便番号を入力してください</p>
+        </div>
+
+        <!-- 住所 -->
+        <div class="form__group" id="group-address">
+          <label class="form__label" for="address">
+            お届け先住所 <span class="form__required">＊</span>
+          </label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            class="form__input"
+            placeholder="例：東京都渋谷区〇〇1-2-3 △△マンション101"
+            autocomplete="street-address"
+          >
+          <p class="form__error" id="error-address">住所を入力してください</p>
+        </div>
+
+        <!-- コース選択 -->
+        <div class="form__group" id="group-course">
+          <label class="form__label">
+            コース選択 <span class="form__required">＊</span>
+          </label>
+          <div class="form__radio-group">
+            <label class="form__radio-label" id="radio-label-teiki">
+              <input type="radio" name="course" value="定期購入（初回3,278円）" class="form__radio" id="radio-teiki">
+              <span class="form__radio-custom"></span>
+              <span class="form__radio-text">
+                <span class="form__radio-title">定期購入</span>
+                <span class="form__radio-desc">初回3,278円（通常9,800円）／2回目以降7,480円<br>いつでも解約OK・送料無料</span>
+              </span>
+            </label>
+            <label class="form__radio-label" id="radio-label-ikkai">
+              <input type="radio" name="course" value="1回のみ（通常価格9,800円）" class="form__radio" id="radio-ikkai">
+              <span class="form__radio-custom"></span>
+              <span class="form__radio-text">
+                <span class="form__radio-title">1回のみ</span>
+                <span class="form__radio-desc">通常価格9,800円（税込）・送料別</span>
+              </span>
+            </label>
+          </div>
+          <p class="form__error" id="error-course">コースを選択してください</p>
+        </div>
+
+        <!-- 備考 -->
+        <div class="form__group" id="group-note">
+          <label class="form__label" for="note">
+            備考 <span class="form__optional">任意</span>
+          </label>
+          <textarea
+            id="note"
+            name="note"
+            class="form__textarea"
+            placeholder="ご要望・アレルギー情報などがあればご記入ください"
+            rows="4"
+          ></textarea>
+        </div>
+
+        <!-- 注意事項 -->
+        <div class="form__notes">
+          <p class="form__notes-title">お申し込みにあたって</p>
+          <ul class="form__notes-list">
+            <li>定期購入は最低2回の受け取りが条件です</li>
+            <li>解約は次回お届け日の10日前までにご連絡ください</li>
+            <li>ご入力いただいた個人情報は商品発送・お問い合わせ対応にのみ使用します</li>
+          </ul>
+        </div>
+
+        <!-- 送信ボタン -->
+        <div class="form__submit-wrap">
+          <button type="submit" class="form__submit" id="submitBtn">
+            この内容で申し込む
+          </button>
+          <p class="form__submit-note">送信後、確認メールをお送りします</p>
+        </div>
+
+      </form>
+
+    </div>
+  </main>
+
+  <footer class="form-footer">
+    <div class="form-footer__inner">
+      <nav class="form-footer__nav">
+        <a href="#" class="form-footer__link">特定商取引法に基づく表示</a>
+        <a href="#" class="form-footer__link">プライバシーポリシー</a>
+      </nav>
+      <p class="form-footer__copy">&copy; 2024 LUMINÉ All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="form.js"></script>
+</body>
+</html>
