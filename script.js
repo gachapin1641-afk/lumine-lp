@@ -97,8 +97,64 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /* ============================================================
-  スクロールフェードイン
+  FV スライドショー（SP/PC共通・3秒自動切替・ドットナビ付き）
 ============================================================ */
+document.addEventListener('DOMContentLoaded', function () {
+
+  const isPC = window.matchMedia('(min-width: 768px)').matches;
+  const slideClass = isPC ? '.fv__slide--pc' : '.fv__slide--sp';
+  const slides = document.querySelectorAll(slideClass);
+  const dots = document.querySelectorAll('.fv__dot');
+
+  if (slides.length === 0) return;
+
+  let currentIndex = 0;
+  let timer = null;
+
+  function goTo(index) {
+    slides[currentIndex].classList.remove('fv__slide--active');
+    dots[currentIndex].classList.remove('fv__dot--active');
+    currentIndex = (index + slides.length) % slides.length;
+    slides[currentIndex].classList.add('fv__slide--active');
+    dots[currentIndex].classList.add('fv__dot--active');
+  }
+
+  function startTimer() {
+    timer = setInterval(function () {
+      goTo(currentIndex + 1);
+    }, 3000);
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    startTimer();
+  }
+
+  // ドットクリックで手動切替
+  dots.forEach(function (dot, i) {
+    dot.addEventListener('click', function () {
+      goTo(i);
+      resetTimer();
+    });
+  });
+
+  // 画面サイズ変化に対応
+  window.matchMedia('(min-width: 768px)').addEventListener('change', function (e) {
+    clearInterval(timer);
+    const newClass = e.matches ? '.fv__slide--pc' : '.fv__slide--sp';
+    const newSlides = document.querySelectorAll(newClass);
+    slides[currentIndex].classList.remove('fv__slide--active');
+    dots[currentIndex].classList.remove('fv__dot--active');
+    currentIndex = 0;
+    newSlides[0].classList.add('fv__slide--active');
+    dots[0].classList.add('fv__dot--active');
+    location.reload(); // シンプルにリロードで対応
+  });
+
+  startTimer();
+
+});
+
 document.addEventListener('DOMContentLoaded', function () {
 
   const fadeItems = document.querySelectorAll('.fade-in');

@@ -44,8 +44,35 @@
     FV（ファーストビュー）
   ============================================================ -->
   <section class="fv">
-    <img src="images/fv-main.jpg" alt="LUMINÉを持つ女性" class="fv__bg fv__bg--sp">
-    <img src="images/fv-main-pc.jpg" alt="LUMINÉを持つ女性" class="fv__bg fv__bg--pc">
+    <!-- スライドショー -->
+    <div class="fv__slideshow">
+      <!-- SP版スライド -->
+      <div class="fv__slide fv__slide--sp fv__slide--active">
+        <img src="images/fv-main.jpg" alt="LUMINÉを持つ女性" class="fv__bg fv__bg--sp">
+      </div>
+      <div class="fv__slide fv__slide--sp">
+        <img src="images/fv-main-2.png" alt="LUMINÉを持つ女性" class="fv__bg fv__bg--sp">
+      </div>
+      <div class="fv__slide fv__slide--sp">
+        <img src="images/fv-main-3.png" alt="LUMINÉを持つ女性" class="fv__bg fv__bg--sp">
+      </div>
+      <!-- PC版スライド -->
+      <div class="fv__slide fv__slide--pc fv__slide--active">
+        <img src="images/fv-main-pc.jpg" alt="LUMINÉを持つ女性" class="fv__bg fv__bg--pc">
+      </div>
+      <div class="fv__slide fv__slide--pc">
+        <img src="images/fv-main-pc-2.png" alt="LUMINÉを持つ女性" class="fv__bg fv__bg--pc">
+      </div>
+      <div class="fv__slide fv__slide--pc">
+        <img src="images/fv-main-pc-3.png" alt="LUMINÉを持つ女性" class="fv__bg fv__bg--pc">
+      </div>
+    </div>
+    <!-- ドットナビゲーション -->
+    <div class="fv__dots" aria-label="スライドナビゲーション">
+      <button class="fv__dot fv__dot--active" aria-label="スライド1"></button>
+      <button class="fv__dot" aria-label="スライド2"></button>
+      <button class="fv__dot" aria-label="スライド3"></button>
+    </div>
     <div class="fv__overlay"></div>
     <div class="fv__content">
 
